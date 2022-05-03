@@ -1,0 +1,23 @@
+{
+  "name": "arquitetura_hexagonal_estudo",
+  "version": "0.0.1",
+  "description": "Arquitetura Hexagonal Estudo.",
+  "scripts": {
+    "release": "standard-version"
+  },
+  "git": "https://github.com/danielso2007/arquitetura_hexagonal_estudo",
+  "keywords": [
+    "Postgres",
+    "database",
+    "Pgadmin4",
+    "docker",
+    "sql",
+    "psql",
+    "pgsql"
+  ],
+  "author": "Daniel Oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "standard-version": "^9.3.2"
+  }
+}
