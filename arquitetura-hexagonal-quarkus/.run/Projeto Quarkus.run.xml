@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Projeto Quarkus" type="QuarkusRunConfiguration" factoryName="QuarkusRunConfiguration">
+    <module name="arquitetura-hexagonal-quarkus" />
+    <option name="profile" />
+    <method v="2" />
+  </configuration>
+</component>
