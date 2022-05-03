@@ -1,0 +1,134 @@
+spring:
+  main:
+    allow-circular-references: true
+  devtools:
+    add-properties: false
+  application:
+    name: '@project.artifactId@-@project.version@'
+  profiles:
+    active: '@spring.profiles.active@'
+  jackson:
+    date-format: 'yyyy-MM-dd HH:mm:ss'
+    default-property-inclusion: NON_NULL
+    locale: pt-BR
+    time-zone: America/Sao_Paulo
+  datasource:
+    driverClassName: 'org.postgresql.Driver'
+    url: '${DB_URL:@db.url@}'
+    username: '${DB_USER:@db.user@}'
+    password: '${DB_PASSWORD:@db.password@}'
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connectionTimeout: 3000
+      idleTimeout: 60000
+      maxLifetime: 180000
+      maximum-pool-size: 50
+      minimum-idle: 1
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+    database-platform: 'org.hibernate.dialect.PostgreSQLDialect'
+    generate-ddl: false
+    open-in-view: true
+    show_sql: '${HOW_SQL:@db.show-sql@}'
+    hibernate:
+      ddl-auto: '@db.ddl-auto@'
+springdoc:
+  version: '@project.version@'
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    enabled: '@swagger-ui-enabled@'
+    disable-swagger-default-url: true
+  api-docs:
+    path: /api-docs
+    enabled: '@api-docs-enabled@'
+  packagesToScan: br.com.arquitetura
+  packages-to-exclude: br.com.arquitetura.commons
+  show-atuator: true
+  auto-tag-classes: false
+server:
+  compression:
+    enabled: true
+    min-response-size: 1
+  port: '${SERVER_PORT:@port@}'
+  undertow:
+    accesslog:
+      dir: logs
+      enabled: false
+      pattern: '%t %a "%r" %s (%D ms)'
+logging:
+  level:
+    org:
+      springframework:
+        test: ERROR
+      hibernate: warn
+      xnio: warn
+      jboss: warn
+    io:
+      undertow: warn
+    com:
+      zaxxer:
+        hikari:
+          HikariDataSource: warn
+# Actuator
+management:
+  security:
+    enabled: false
+  trace:
+    http:
+      enabled: true
+  metrics:
+    data:
+      repository:
+        autotime:
+          enabled: false
+    tags:
+      application: '@project.artifactId@'
+    distribution:
+      sla:
+        http:
+          server:
+            requests: 1ms,5ms
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    _links:
+      enabled: false
+      health:
+        show-details: always
+      health-path:
+        enabled: false
+    httptrace:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    web:
+      base-path: /actuator
+      cors:
+        allowed-methods: GET
+      exposure:
+        include: '*'
+info:
+  app:
+    name: '@project.artifactId@'
+    description: '@project.description@'
+    version: '@project.version@'
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      version: '@java.version@'
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
